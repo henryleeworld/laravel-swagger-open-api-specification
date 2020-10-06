@@ -1,4 +1,4 @@
-# Laravel 7 Swagger 開放應用程式介面規範
+# Laravel 8 Swagger 開放應用程式介面規範
 
 Swagger 會將複雜的應用程式介面資訊結合至可互動且與語言無關的參考資源。若要對應用程式介面執行作業，Swagger 會針對要使用的 JSON 承載、HTTP 方法和特定端點提供重要的參考資料。Laravel 7 Swagger 開放應用程式介面規範主要是用的 [QuickAdminPanel](https://quickadminpanel.com) 生成的，除了一些定制代碼，可依需求彈性改造的工具。
 
@@ -19,6 +19,10 @@ $ php artisan key:generate
 - 執行 __Artisan__ 指令的 __migrate__ 來執行所有未完成的遷移，並執行資料庫填充（如果要測試的話）。
 ```sh
 $ php artisan migrate --seed
+```
+- 執行安裝 Laravel Mix 引用的依賴項目，並執行所有 Mix 任務。
+```sh
+$ npm install && npm run dev
 ```
 - 如果有修改 Swagger 應用程式介面文件內容，請執行 __Artisan__ 指令的 __l5-swagger__ 來執行重新生成 Swagger 應用程式介面文件。
 ```sh
