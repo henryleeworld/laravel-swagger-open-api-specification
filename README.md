@@ -1,6 +1,6 @@
 # Laravel 8 Swagger 開放應用程式介面規範
 
-Swagger 會將複雜的應用程式介面資訊結合至可互動且與語言無關的參考資源。若要對應用程式介面執行作業，Swagger 會針對要使用的 JSON 承載、HTTP 方法和特定端點提供重要的參考資料。Laravel 7 Swagger 開放應用程式介面規範主要是用的 [QuickAdminPanel](https://quickadminpanel.com) 生成的，除了一些定制代碼，可依需求彈性改造的工具。
+Swagger 會將複雜的應用程式介面資訊結合至可互動且與語言無關的參考資源。若要對應用程式介面執行作業，Swagger 會針對要使用的 JSON 承載、HTTP 方法和特定端點提供重要的參考資料。Laravel 8 Swagger 開放應用程式介面規範主要是用的 [QuickAdminPanel](https://quickadminpanel.com) 生成的，除了一些定制代碼，可依需求彈性改造的工具。
 
 ## 使用方式
 - 把整個專案複製一份到你的電腦裡，這裡指的「內容」不是只有檔案，而是指所有整個專案的歷史紀錄、分支、標籤等內容都會複製一份下來。

@@ -60,7 +60,7 @@
         @can('project_access')
             <li class="c-sidebar-nav-item">
                 <a href="{{ route("admin.projects.index") }}" class="c-sidebar-nav-link {{ request()->is('admin/projects') || request()->is('admin/projects/*') ? 'active' : '' }}">
-                    <i class="fa-fw fas fa-tasks nav-icon">
+                    <i class="fa-fw fas fa-tasks c-sidebar-nav-icon">
 
                     </i>
                     {{ trans('cruds.project.title') }}
