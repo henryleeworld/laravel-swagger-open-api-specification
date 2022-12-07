@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Virtual;
+
 /**
  * @OA\Schema(
  *      title="更新專案請求",

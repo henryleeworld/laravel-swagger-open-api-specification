@@ -16,6 +16,11 @@ return [
             ],
             'paths' => [
                 /*
+                 * Edit to include full URL in ui for assets
+                */
+                'use_absolute_path' => env('L5_SWAGGER_USE_ABSOLUTE_PATH', true),
+
+                /*
                  * File name of the generated json documentation file
                 */
                 'docs_json' => 'api-docs.json',
@@ -24,6 +29,11 @@ return [
                  * File name of the generated YAML documentation file
                 */
                 'docs_yaml' => 'api-docs.yaml',
+
+                /*
+                * Set this to `json` or `yaml` to determine which documentation file to use in UI
+                */
+                'format_to_use_for_docs' => env('L5_FORMAT_TO_USE_FOR_DOCS', 'json'),
 
                 /*
                  * Absolute paths to directory containing the swagger annotations are stored.
@@ -51,16 +61,7 @@ return [
              * Middleware allows to prevent unexpected access to API documentation
             */
             'middleware' => [
-                'api' => [
-                    \App\Http\Middleware\EncryptCookies::class,
-                    \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-                    \Illuminate\Session\Middleware\StartSession::class,
-                    \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-                    \App\Http\Middleware\VerifyCsrfToken::class,
-                    \Illuminate\Routing\Middleware\SubstituteBindings::class,
-                    \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
-                    'auth',
-                ],
+                'api' => [],
                 'asset' => [],
                 'docs' => [],
                 'oauth2_callback' => [],
@@ -95,8 +96,50 @@ return [
 
             /*
              * Absolute path to directories that should be exclude from scanning
+             * @deprecated Please use `scanOptions.exclude`
+             * `scanOptions.exclude` overwrites this
             */
             'excludes' => [],
+        ],
+
+        'scanOptions' => [
+            /**
+             * analyser: defaults to \OpenApi\StaticAnalyser .
+             *
+             * @see \OpenApi\scan
+             */
+            'analyser' => null,
+
+            /**
+             * analysis: defaults to a new \OpenApi\Analysis .
+             *
+             * @see \OpenApi\scan
+             */
+            'analysis' => null,
+
+            /**
+             * Custom query path processors classes.
+             *
+             * @link https://github.com/zircote/swagger-php/tree/master/Examples/schema-query-parameter-processor
+             * @see \OpenApi\scan
+             */
+            'processors' => [
+                // new \App\SwaggerProcessors\SchemaQueryParameter(),
+            ],
+
+            /**
+             * pattern: string       $pattern File pattern(s) to scan (default: *.php) .
+             *
+             * @see \OpenApi\scan
+             */
+            'pattern' => null,
+
+            /*
+             * Absolute path to directories that should be exclude from scanning
+             * @note This option overwrites `paths.excludes`
+             * @see \OpenApi\scan
+            */
+            'exclude' => [],
         ],
 
         /*
@@ -141,6 +184,12 @@ return [
                             "scopes" => []
                         ],
                     ],
+                ],
+                'sanctum' => [ // Unique name of security
+                    'type' => 'apiKey', // Valid values are "basic", "apiKey" or "oauth2".
+                    'description' => 'Enter token in format (Bearer <token>)',
+                    'name' => 'Authorization', // The name of the header or query parameter to be used.
+                    'in' => 'header', // The location of the API key. Valid values are "query" or "header".
                 ],
                 */
             ],
@@ -198,7 +247,45 @@ return [
         'validator_url' => null,
 
         /*
-         * Uncomment to add constants which can be used in annotations
+         * Swagger UI configuration parameters
+        */
+        'ui' => [
+            'display' => [
+                /*
+                 * Controls the default expansion setting for the operations and tags. It can be :
+                 * 'list' (expands only the tags),
+                 * 'full' (expands the tags and operations),
+                 * 'none' (expands nothing).
+                 */
+                'doc_expansion' => env('L5_SWAGGER_UI_DOC_EXPANSION', 'none'),
+
+                /**
+                 * If set, enables filtering. The top bar will show an edit box that
+                 * you can use to filter the tagged operations that are shown. Can be
+                 * Boolean to enable or disable, or a string, in which case filtering
+                 * will be enabled using that string as the filter expression. Filtering
+                 * is case-sensitive matching the filter expression anywhere inside
+                 * the tag.
+                 */
+                'filter' => env('L5_SWAGGER_UI_FILTERS', true), // true | false
+            ],
+
+            'authorization' => [
+                /*
+                 * If set to true, it persists authorization data, and it would not be lost on browser close/refresh
+                 */
+                'persist_authorization' => env('L5_SWAGGER_UI_PERSIST_AUTHORIZATION', false),
+
+                'oauth2' => [
+                    /*
+                    * If set to true, adds PKCE to AuthorizationCodeGrant flow
+                    */
+                    'use_pkce_with_authorization_code_grant' => false,
+                ],
+            ],
+        ],
+        /*
+         * Constants which can be used in annotations
          */
         'constants' => [
             'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
