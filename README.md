@@ -1,4 +1,4 @@
-# Laravel 9 Swagger 開放應用程式介面規範
+# Laravel 10 Swagger 開放應用程式介面規範
 
 Swagger 會將複雜的應用程式介面資訊結合至可互動且與語言無關的參考資源。若要對應用程式介面執行作業，Swagger 會針對要使用的 JSON 承載、HTTP 方法和特定端點提供重要的參考資料。
 
@@ -31,5 +31,5 @@ $ php artisan l5-swagger:generate
 ----
 
 ## 畫面截圖
-![](https://i.imgur.com/jmoPgQC.png)
+![](https://i.imgur.com/UlTPiQB.png)
 > 自動產生的 Swagger 參考資料提供重要概念的快速概觀、可用的管理應用程式介面端點，以及每個物件模型的說明，以協助執行開發和測試工作
